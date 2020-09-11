@@ -4,7 +4,6 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
-import api from "../utils/Api";
 
 function App() {
     const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState();
@@ -83,19 +82,19 @@ function App() {
           <ImagePopup />
       </div>
 
-      <template className="pictures-template">
-        <li className="pictures__item">
-          <button className="button pictures__delete opacity" type="button" />
-          <img className="pictures__image" src="#" alt="" />
-            <div className="pictures__cover">
-              <p className="pictures__title" />
-              <div className="pictures__like-cover">
-                <button className="button pictures__like opacity" type="button" />
-                <span className="pictures__like-counter" />
-              </div>
-            </div>
-        </li>
-      </template>
+      {/*<template className="pictures-template">*/}
+      {/*  <li className="pictures__item">*/}
+      {/*    <button className="button pictures__delete opacity" type="button" />*/}
+      {/*    <img className="pictures__image" src="#" alt="" />*/}
+      {/*      <div className="pictures__cover">*/}
+      {/*        <p className="pictures__title" />*/}
+      {/*        <div className="pictures__like-cover">*/}
+      {/*          <button className="button pictures__like opacity" type="button" />*/}
+      {/*          <span className="pictures__like-counter" />*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*  </li>*/}
+      {/*</template>*/}
       </div>
   );
 }
