@@ -6,9 +6,9 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
 function App() {
-    const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState();
-    const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState();
-    const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState();
+    const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+    const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
+    const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
     const [selectedCard, setSelectedCard] = React.useState(false);
 
     const handleEditAvatarClick = () => {
@@ -32,7 +32,7 @@ function App() {
         setEditProfilePopupOpen(false);
         setAddPlacePopupOpen(false);
         setSelectedCard(false);
-    }
+    }пше
 
   return (
       <div className="page">
@@ -48,11 +48,11 @@ function App() {
               <PopupWithForm title={'Редактировать профиль'} name={'edit'} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
                   <div className="popup__cover">
                       <label className="popup__control">
-                          <input className="popup__input popup__input_type_name" type="text" name="name" minLength="2" maxLength="20" pattern="^[A-Za-zА-Яа-яЁё\s\D]+$" required />
+                          <input className="popup__input popup__input_type_name" type="text" name="name" placeholder="Имя" minLength="2" maxLength="20" pattern="^[A-Za-zА-Яа-яЁё\s\D]+$" required />
                           <span className="popup__error" />
                       </label>
                       <label className="popup__control">
-                          <input className="popup__input popup__input_type_about" type="text" name="about" minLength="2" maxLength="200" pattern="^[A-Za-zА-Яа-яЁё\s\D]+$" required />
+                          <input className="popup__input popup__input_type_about" type="text" name="about" placeholder="Занятие" minLength="2" maxLength="200" pattern="^[A-Za-zА-Яа-яЁё\s\D]+$" required />
                           <span className="popup__error" />
                       </label>
                   </div>
