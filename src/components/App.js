@@ -32,7 +32,7 @@ function App() {
         setEditProfilePopupOpen(false);
         setAddPlacePopupOpen(false);
         setSelectedCard(false);
-    }пше
+    }
 
   return (
       <div className="page">
