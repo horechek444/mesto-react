@@ -1,31 +1,31 @@
 class Api {
-    constructor({ baseUrl, headers }) {
+    constructor({baseUrl, headers}) {
         this.baseUrl = baseUrl;
         this.headers = headers;
     }
 
     getUserInfo() {
-        return fetch(`${this.baseUrl}users/me`, { 
+        return fetch(`${this.baseUrl}users/me`, {
             headers: this.headers,
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Ошибка: ${res.status}`)
-        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Ошибка: ${res.status}`)
+            })
     }
 
     getCards() {
-        return fetch(`${this.baseUrl}cards`, { 
+        return fetch(`${this.baseUrl}cards`, {
             headers: this.headers,
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Ошибка: ${res.status}`)
-        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Ошибка: ${res.status}`)
+            })
     }
 
     setUserInfo(item) {
@@ -37,15 +37,15 @@ class Api {
                 about: item.about
             })
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Ошибка: ${res.status}`)
-        }) 
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Ошибка: ${res.status}`)
+            })
     }
 
-    createCard(newCard) { 
+    createCard(newCard) {
         return fetch(`${this.baseUrl}cards`, {
             method: 'POST',
             headers: this.headers,
@@ -54,51 +54,51 @@ class Api {
                 link: newCard.link,
             })
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Ошибка: ${res.status}`)
-        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Ошибка: ${res.status}`)
+            })
     }
 
-    deleteCard(id) { 
+    deleteCard(id) {
         return fetch(`${this.baseUrl}cards/${id}`, {
             method: 'DELETE',
             headers: this.headers,
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Ошибка: ${res.status}`)
-        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Ошибка: ${res.status}`)
+            })
     }
 
-    likeCard(id) { 
+    likeCard(id) {
         return fetch(`${this.baseUrl}cards/likes/${id}`, {
             method: 'PUT',
             headers: this.headers,
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Ошибка: ${res.status}`)
-        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Ошибка: ${res.status}`)
+            })
     }
 
-    dislikeCard(id) { 
+    dislikeCard(id) {
         return fetch(`${this.baseUrl}cards/likes/${id}`, {
             method: 'DELETE',
             headers: this.headers,
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Ошибка: ${res.status}`)
-        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Ошибка: ${res.status}`)
+            })
     }
 
     setAvatar(avatar) {
@@ -107,12 +107,12 @@ class Api {
             headers: this.headers,
             body: JSON.stringify(avatar),
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Ошибка: ${res.status}`)
-        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Ошибка: ${res.status}`)
+            })
     }
 }
 
