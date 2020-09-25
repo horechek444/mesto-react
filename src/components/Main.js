@@ -3,11 +3,11 @@ import api from "../utils/Api";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardDelete}) {
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
     const currentUser = React.useContext(CurrentUserContext);
     const [cards, setCards] = React.useState([]);
 
-    const handleCardLike = (card) => {
+    const handleCardLike = React.useCallback((card) => {
         const isLiked = card.likes.some(i => i._id === currentUser._id);
         const promise = isLiked ? api.dislikeCard(card._id) : api.likeCard(card._id);
         promise
@@ -18,9 +18,9 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardDelet
             .catch((err) => {
             console.log(`${err}`);
             });
-    }
+    });
 
-    const handleCardDelete = (card) => {
+    const handleCardDelete = React.useCallback((card) => {
         api.deleteCard(card._id)
             .then(() => {
                 const deleteCards = cards.filter((c) => c._id !== card._id);
@@ -29,16 +29,29 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardDelet
             .catch((err) => {
                 console.log(`${err}`);
             });
+    });
+
+    // React.useEffect(() => {
+    //     api.getCards()
+    //         .then((cards) => {
+    //         setCards(cards);
+    //     })
+    //     .catch((err) => {
+    //         console.log(`${err}`);
+    //     });
+    // }, [])
+
+    const loadCards = async () => {
+        try {
+            const cards = await api.getCards();
+            setCards(cards);
+        } catch (err) {
+            console.log(`${err}`);
+        }
     }
 
     React.useEffect(() => {
-        api.getCards()
-            .then((cards) => {
-            setCards(cards);
-        })
-        .catch((err) => {
-            console.log(`${err}`);
-        });
+        loadCards();
     }, [])
 
     return (
