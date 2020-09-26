@@ -1,49 +1,9 @@
 import React from "react";
-import api from "../utils/Api";
 import Card from "./Card";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
+const Main = ({onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, onCardDelete, cards}) => {
     const currentUser = React.useContext(CurrentUserContext);
-    const [cards, setCards] = React.useState([]);
-
-    const handleCardLike = React.useCallback((card) => {
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
-        const promise = isLiked ? api.dislikeCard(card._id) : api.likeCard(card._id);
-        promise
-            .then((newCard) => {
-                const newCards = cards.map((c) => c._id === card._id ? newCard : c);
-                setCards(newCards);
-            })
-            .catch((err) => {
-                console.log(`${err}`);
-            });
-    }, [cards, currentUser._id]);
-
-    const handleCardDelete = React.useCallback((card) => {
-        api.deleteCard(card._id)
-            .then(() => {
-                const deleteCards = cards.filter((c) => c._id !== card._id);
-                setCards(deleteCards);
-            })
-            .catch((err) => {
-                console.log(`${err}`);
-            });
-    }, [cards]);
-
-    const loadCards = async () => {
-        try {
-            const cards = await api.getCards();
-            setCards(cards);
-        } catch (err) {
-            console.log(`${err}`);
-        }
-    }
-
-    React.useEffect(() => {
-        loadCards();
-    }, [])
-
     return (
         <main className="content page__content">
             <section className="profile">
@@ -65,7 +25,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
             <section className="pictures">
                 <ul className="pictures__list">
                     {cards.map((card) => <Card key={card._id} onCardClick={onCardClick} card={card}
-                                               onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>)}
+                                               onCardLike={onCardLike} onCardDelete={onCardDelete}/>)}
                 </ul>
             </section>
         </main>
