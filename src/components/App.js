@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -68,30 +68,30 @@ const App = () => {
         getUserInfo();
     }, [])
 
-    const handleEditAvatarClick = React.useCallback(() => {
+    const handleEditAvatarClick = () => {
         setEditAvatarPopupOpen(true);
-    }, []);
+    };
 
-    const handleEditProfileClick = React.useCallback(() => {
+    const handleEditProfileClick = () => {
         setEditProfilePopupOpen(true);
-    }, []);
+    };
 
-    const handleAddPlaceClick = React.useCallback(() => {
+    const handleAddPlaceClick = () => {
         setAddPlacePopupOpen(true);
-    }, []);
+    };
 
-    const handleCardClick = React.useCallback((card) => {
+    const handleCardClick = (card) => {
         setSelectedCard(card);
-    }, []);
+    };
 
-    const closeAllPopups = React.useCallback(() => {
+    const closeAllPopups = () => {
         setEditAvatarPopupOpen(false);
         setEditProfilePopupOpen(false);
         setAddPlacePopupOpen(false);
         setSelectedCard(false);
-    }, []);
+    };
 
-    const handleUpdateUser = React.useCallback((userInfo) => {
+    const handleUpdateUser = (userInfo) => {
         api.setUserInfo(userInfo)
             .then((userData) => {
                 setCurrentUser(userData);
@@ -100,9 +100,9 @@ const App = () => {
             .catch((err) => {
                 console.log(`${err}`);
             });
-    }, [closeAllPopups]);
+    };
 
-    const handleUpdateAvatar = React.useCallback((inputValue) => {
+    const handleUpdateAvatar = (inputValue) => {
         api.setAvatar(inputValue)
             .then((avatar) => {
                 setCurrentUser(avatar);
@@ -111,13 +111,22 @@ const App = () => {
             .catch((err) => {
                 console.log(`${err}`);
             });
-    }, [closeAllPopups]);
+    };
 
     const handleEscapeClose = (event) => {
-        if (event.key === 'Escape') {
-            closeAllPopups();
+        if(event.key === 'Escape') {
+            closeAllPopups()
         }
     };
+
+    React.useEffect(() => {
+        document.addEventListener("keydown", handleEscapeClose, false);
+
+        return () => {
+            document.removeEventListener("keydown", handleEscapeClose, false);
+        };
+    }, []);
+
 
     const handleAddPlaceSubmit = (inputValue) => {
         api.createCard(inputValue)
@@ -131,7 +140,7 @@ const App = () => {
     };
 
     return (
-        <div className="page" onKeyUp={handleEscapeClose}>
+        <div className="page">
             <div className="page__cover">
                 <CurrentUserContext.Provider value={currentUser}>
                     <Header/>

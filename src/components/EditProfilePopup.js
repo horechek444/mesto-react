@@ -10,17 +10,17 @@ const EditProfilePopup =({isOpen, onClose, onUpdateUser}) => {
         setName(event.target.value);
     }, []);
 
-    const handleInputAboutChange = React.useCallback((event) => {
+    const handleInputAboutChange = (event) => {
         setDescription(event.target.value);
-    }, []);
+    };
 
-    const handleSubmit = React.useCallback((event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         onUpdateUser({
             name,
             about: description,
         });
-    }, [name, description, onUpdateUser]);
+    };
 
     React.useEffect(() => {
         setName(currentUser.name || '');
