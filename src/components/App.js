@@ -14,7 +14,7 @@ const App = () => {
     const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
-    const [isDeletePopupOpen, setDeletePopupOpen] = React.useState(false)
+    const [isDeletePopupOpen, setDeletePopupOpen] = React.useState(false);
     const [selectedCard, setSelectedCard] = React.useState(false);
     const [currentUser, setCurrentUser] = React.useState([]);
     const [cards, setCards] = React.useState([]);
@@ -83,9 +83,7 @@ const App = () => {
 
     const handleDeletePopupOpenClick = (card) => {
         setDeletePopupOpen(true);
-        console.log(card);
         setSelectedCard(card);
-        handleCardClick(!card);
     };
 
     const handleCardClick = (card) => {
@@ -170,7 +168,7 @@ const App = () => {
                     <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}
                                    onAddPlace={handleAddPlaceSubmit}/>
 
-                    <DeleteConfirmPopup onClose={closeAllPopups} isOpen={isDeletePopupOpen}
+                    <DeleteConfirmPopup isOpen={isDeletePopupOpen} onClose={closeAllPopups}
                                         card={selectedCard} onCardDelete={handleCardDelete}/>
 
                     <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}
