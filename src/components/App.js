@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import PopupWithForm from "./PopupWithForm";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
+import DeleteConfirmPopup from "./DeleteConfirmPopup";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
@@ -14,6 +14,7 @@ const App = () => {
     const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
+    const [isDeletePopupOpen, setDeletePopupOpen] = React.useState(false)
     const [selectedCard, setSelectedCard] = React.useState(false);
     const [currentUser, setCurrentUser] = React.useState([]);
     const [cards, setCards] = React.useState([]);
@@ -80,6 +81,13 @@ const App = () => {
         setAddPlacePopupOpen(true);
     };
 
+    const handleDeletePopupOpenClick = (card) => {
+        setDeletePopupOpen(true);
+        console.log(card);
+        setSelectedCard(card);
+        handleCardClick(!card);
+    };
+
     const handleCardClick = (card) => {
         setSelectedCard(card);
     };
@@ -88,6 +96,7 @@ const App = () => {
         setEditAvatarPopupOpen(false);
         setEditProfilePopupOpen(false);
         setAddPlacePopupOpen(false);
+        setDeletePopupOpen(false);
         setSelectedCard(false);
     };
 
@@ -114,7 +123,7 @@ const App = () => {
     };
 
     const handleEscapeClose = (event) => {
-        if(event.key === 'Escape') {
+        if (event.key === 'Escape') {
             closeAllPopups()
         }
     };
@@ -125,7 +134,7 @@ const App = () => {
         return () => {
             document.removeEventListener("keydown", handleEscapeClose, false);
         };
-    }, []);
+    });
 
 
     const handleAddPlaceSubmit = (inputValue) => {
@@ -150,7 +159,7 @@ const App = () => {
                         onAddPlace={handleAddPlaceClick}
                         onCardClick={handleCardClick}
                         onCardLike={handleCardLike}
-                        onCardDelete={handleCardDelete}
+                        onCardDelete={handleDeletePopupOpenClick}
                         cards={cards}
                     />
                     <Footer/>
@@ -161,9 +170,8 @@ const App = () => {
                     <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}
                                    onAddPlace={handleAddPlaceSubmit}/>
 
-                    <PopupWithForm title={'Вы уверены?'} name={'prevent'}>
-                        <input className="button popup__submit" type="submit" value="Да" name="submit"/>
-                    </PopupWithForm>
+                    <DeleteConfirmPopup onClose={closeAllPopups} isOpen={isDeletePopupOpen}
+                                        card={selectedCard} onCardDelete={handleCardDelete}/>
 
                     <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}
                                      onUpdateAvatar={handleUpdateAvatar}/>
