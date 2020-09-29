@@ -2,7 +2,7 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
-const EditProfilePopup =({isOpen, onClose, onUpdateUser}) => {
+const EditProfilePopup =({isOpen, onClose, onUpdateUser, isLoading}) => {
     const currentUser = React.useContext(CurrentUserContext);
     const [name, setName] = React.useState('');
     const [description, setDescription] = React.useState('');
@@ -44,7 +44,7 @@ const EditProfilePopup =({isOpen, onClose, onUpdateUser}) => {
                     <span className="popup__error"/>
                 </label>
             </div>
-            <input className="button popup__submit popup__submit_type_save" type="submit" value="Сохранить"
+            <input className="button popup__submit" type="submit" value={`${isLoading ? `Сохранение...` : `Сохранить`}`}
                    name="submit"/>
         </PopupWithForm>
     )

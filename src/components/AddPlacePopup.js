@@ -1,7 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
+const AddPlacePopup = ({isOpen, onClose, onAddPlace, isLoading}) => {
     const nameInputRef = React.useRef(null);
     const linkInputRef = React.useRef(null);
 
@@ -28,7 +28,7 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
                     <span className="popup__error"/>
                 </label>
             </div>
-            <input className="button popup__submit popup__submit_type_save" type="submit" value="Сохранить"
+            <input className="button popup__submit" type="submit" value={`${isLoading ? `Сохранение...` : `Сохранить`}`}
                    name="submit"/>
         </PopupWithForm>
     )

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ImagePopup = ({card, onClose}) => {
+const ImagePopup = ({card, isOpen, onClose}) => {
     const handleOverlayClose = (event) => {
         if (event.target === event.currentTarget) {
             onClose();
@@ -8,7 +8,7 @@ const ImagePopup = ({card, onClose}) => {
     };
 
     return (
-        <section className={card ? "popup popup_type_picture popup_opened" : "popup popup_type_picture"}
+        <section className={`${isOpen ? `popup popup_type_picture popup_opened` : `popup popup_type_picture`}`}
                  onMouseUp={handleOverlayClose}>
             <div className="popup__container popup__container_type_picture">
                 <button className="button popup__close opacity" type="button" onClick={onClose}/>
