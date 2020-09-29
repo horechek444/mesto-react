@@ -8,7 +8,8 @@ const PopupWithForm = ({name, isOpen, onClose, title, children, onSubmit}) => {
     };
 
     return (
-        <section className={`${isOpen ? `popup popup_type_${name} popup_opened` : `popup popup_type_${name}`}`} onMouseUp={handleOverlayClose}>
+        <section className={`${isOpen ? `popup popup_type_${name} popup_opened` : `popup popup_type_${name}`}`}
+                 onMouseUp={handleOverlayClose}>
             <div className="popup__container">
                 <button className="button popup__close opacity" type="button" onClick={onClose}/>
                 <h2 className="popup__title">{title}</h2>
