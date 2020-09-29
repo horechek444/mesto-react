@@ -6,9 +6,10 @@ const EditProfilePopup =({isOpen, onClose, onUpdateUser, isLoading}) => {
     const currentUser = React.useContext(CurrentUserContext);
     const [name, setName] = React.useState('');
     const [description, setDescription] = React.useState('');
-    const handleInputNameChange = React.useCallback((event) => {
+
+    const handleInputNameChange = (event) => {
         setName(event.target.value);
-    }, []);
+    };
 
     const handleInputAboutChange = (event) => {
         setDescription(event.target.value);
@@ -25,7 +26,7 @@ const EditProfilePopup =({isOpen, onClose, onUpdateUser, isLoading}) => {
     React.useEffect(() => {
         setName(currentUser.name || '');
         setDescription(currentUser.about || '');
-    }, [currentUser])
+    }, [currentUser]);
 
     return (
         <PopupWithForm title={'Редактировать профиль'} name={'edit'} isOpen={isOpen} onClose={onClose}
