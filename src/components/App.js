@@ -50,18 +50,10 @@ const App = () => {
             })
     };
 
-    const loadCards = async () => {
+    const getUserAndCards = async () => {
         try {
-            const cards = await api.getCards();
+            const [userInfo, cards] = await Promise.all([api.getUserInfo(), api.getCards()]);
             setCards(cards);
-        } catch (err) {
-            console.log(`${err}`);
-        }
-    };
-
-    const getUserInfo = async () => {
-        try {
-            const userInfo = await api.getUserInfo();
             setCurrentUser(userInfo);
         } catch (err) {
             console.log(`${err}`);
@@ -69,11 +61,7 @@ const App = () => {
     };
 
     React.useEffect(() => {
-        loadCards();
-    }, [])
-
-    React.useEffect(() => {
-        getUserInfo();
+        getUserAndCards();
     }, [])
 
     const handleEditAvatarClick = () => {
