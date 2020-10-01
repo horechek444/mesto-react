@@ -2,7 +2,7 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
 const AddPlacePopup = ({isOpen, onClose, onAddPlace, isLoading}) => {
-    const [isValid, setIsValid] = React.useState({name: true, link: true});
+    const [isValid, setIsValid] = React.useState({name: false, link: false});
     const [inputValue, setInputValue] = React.useState({name: '', link: ''});
     const [validationMessage, setValidationMessage] = React.useState({name: '', link: ''});
 
@@ -21,7 +21,7 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace, isLoading}) => {
         setValidationMessage({
             ...validationMessage,
             [name]: event.target.validationMessage
-        })
+        });
     };
 
     const handleSubmit = (event) => {
@@ -32,6 +32,12 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace, isLoading}) => {
         });
     }
 
+    React.useEffect(() => {
+        setInputValue({name: '', link: ''});
+        setIsValid({name: false, link: false});
+        setValidationMessage({name: '', link: ''});
+    }, [isOpen]);
+
     return (
         <PopupWithForm title={'Новое место'} name={'add'} isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
             <div className="popup__cover">
@@ -40,7 +46,9 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace, isLoading}) => {
                         className={`${isValid.name ? `popup__input popup__input_type_title` : `popup__input popup__input_type_title popup__input_type_error`}`}
                         type="text" name="name"
                         placeholder="Название" minLength="1" maxLength="30"
-                        pattern="^[A-Za-zА-Яа-яЁё\s\D]+$" required value={inputValue.name}
+                        pattern="^[A-Za-zА-Яа-яЁё\s\D]+$"
+                        required
+                        value={inputValue.name}
                         onChange={handleInputChange}/>
                     <span
                         className={`${isValid.name ? `popup__error` : `popup__error popup__error_type_active`}`}>{validationMessage.name}</span>
@@ -48,8 +56,8 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace, isLoading}) => {
                 <label className="popup__control">
                     <input
                         className={`${isValid.link ? `popup__input popup__input_type_link` : `popup__input popup__input_type_link popup__input_type_error`}`}
-                        type="url" name="link"
-                        placeholder="Ссылка на картинку" required value={inputValue.link} onChange={handleInputChange}/>
+                        type="url" name="link" placeholder="Ссылка на картинку" required value={inputValue.link}
+                        onChange={handleInputChange}/>
                     <span
                         className={`${isValid.link ? `popup__error` : `popup__error popup__error_type_active`}`}>{validationMessage.link}</span>
                 </label>
