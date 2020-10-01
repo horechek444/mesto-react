@@ -17,12 +17,8 @@ const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar, isLoading}) => {
                        onSubmit={handleSubmit}>
             <div className="popup__cover popup__cover_type_avatar">
                 <label className="popup__control">
-                    <input ref={avatarInputRef}
-                           className={"popup__input popup__input_type_avatar"}
-                           type="url"
-                           name="avatar"
-                           placeholder="Ссылка на картинку"
-                           required/>
+                    <input ref={avatarInputRef} className={"popup__input popup__input_type_avatar"}
+                           type="url" name="avatar" placeholder="Ссылка на картинку" required/>
                     <span className={"popup__error"}/>
                 </label>
             </div>
