@@ -1,28 +1,16 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
+import ValidationHook from "../hooks/validationHook";
 
 const AddPlacePopup = ({isOpen, onClose, onAddPlace, isLoading}) => {
-    const [isValid, setIsValid] = React.useState({name: false, link: false});
-    const [inputValue, setInputValue] = React.useState({name: '', link: ''});
-    const [validationMessage, setValidationMessage] = React.useState({name: '', link: ''});
+    const fields = ['name', 'link'];
 
-    const handleInputChange = (event) => {
-        const {name, value} = event.target;
-        setInputValue({
-            ...inputValue,
-            [name]: value
-        });
-
-        setIsValid({
-            ...isValid,
-            [name]: event.target.validity.valid
-        });
-
-        setValidationMessage({
-            ...validationMessage,
-            [name]: event.target.validationMessage
-        });
-    };
+    const {
+        isValid, setIsValid,
+        inputValue, setInputValue,
+        validationMessage, setValidationMessage,
+        handleInputChange, fieldsEnumeration
+    } = ValidationHook(fields);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,9 +21,9 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace, isLoading}) => {
     }
 
     React.useEffect(() => {
-        setInputValue({name: '', link: ''});
-        setIsValid({name: false, link: false});
-        setValidationMessage({name: '', link: ''});
+        setInputValue(fieldsEnumeration(''));
+        setIsValid(fieldsEnumeration(false));
+        setValidationMessage(fieldsEnumeration(''));
     }, [isOpen]);
 
     return (
