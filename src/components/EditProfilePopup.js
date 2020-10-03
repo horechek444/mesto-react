@@ -28,7 +28,7 @@ const EditProfilePopup = ({isOpen, onClose, onUpdateUser, isLoading}) => {
             name: currentUser.name || '',
             about: currentUser.about || '',
         });
-        setIsValid(fieldsEnumeration(false));
+        setIsValid(fieldsEnumeration(true));
         setValidationMessage(fieldsEnumeration(''));
     }, [currentUser, isOpen]);
 
