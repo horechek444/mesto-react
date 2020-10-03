@@ -14,16 +14,6 @@ const EditProfilePopup = ({isOpen, onClose, onUpdateUser, isLoading}) => {
     } = ValidationHook(fields);
 
     const currentUser = React.useContext(CurrentUserContext);
-    // const [name, setName] = React.useState('');
-    // const [description, setDescription] = React.useState('');
-    //
-    // const handleInputNameChange = (event) => {
-    //     setName(event.target.value);
-    // };
-    //
-    // const handleInputAboutChange = (event) => {
-    //     setDescription(event.target.value);
-    // };
 
     const handleSubmit = (event) => {
         event.preventDefault();
