@@ -140,7 +140,6 @@ const App = () => {
         };
     });
 
-
     const handleAddPlaceSubmit = (inputValue) => {
         setIsLoading(true)
         api.createCard(inputValue)
