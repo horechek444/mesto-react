@@ -1,6 +1,6 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import ValidationHook from "../hooks/validationHook";
+import useValidation from "../hooks/useValidation";
 
 const AddPlacePopup = ({isOpen, onClose, onAddPlace, isLoading}) => {
     const fields = ['name', 'link'];
@@ -10,7 +10,7 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace, isLoading}) => {
         inputValue, setInputValue,
         validationMessage, setValidationMessage,
         handleInputChange, fieldsEnumeration
-    } = ValidationHook(fields);
+    } = useValidation(fields);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,7 +33,7 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace, isLoading}) => {
                     <input
                         className={`${validationMessage.name ? `popup__input popup__input_type_title popup__input_type_error` : `popup__input popup__input_type_title`}`}
                         type="text" name="name" placeholder="Название" minLength="1" maxLength="30"
-                        pattern="^[A-Za-zА-Яа-яЁё\s\D]+$"
+                        pattern="^[A-Za-zА-Яа-яЁё\D][A-Za-zА-Яа-яЁё\s\D]*[A-Za-zА-Яа-яЁё\D]$"
                         required value={inputValue.name}
                         onChange={handleInputChange}/>
                     <span

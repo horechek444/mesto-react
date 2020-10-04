@@ -1,6 +1,6 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import ValidationHook from "../hooks/validationHook";
+import useValidation from "../hooks/useValidation";
 
 const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar, isLoading}) => {
     const fields = ['avatar'];
@@ -10,7 +10,7 @@ const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar, isLoading}) => {
         inputValue, setInputValue,
         validationMessage, setValidationMessage,
         handleInputChange, fieldsEnumeration
-    } = ValidationHook(fields);
+    } = useValidation(fields);
 
     const avatarInputRef = React.useRef(null);
 
