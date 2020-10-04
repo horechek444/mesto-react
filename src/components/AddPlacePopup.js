@@ -24,7 +24,7 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace, isLoading}) => {
         setInputValue(fieldsEnumeration(''));
         setIsValid(fieldsEnumeration(false));
         setValidationMessage(fieldsEnumeration(''));
-    }, [isOpen]);
+    }, [isOpen, setInputValue, setIsValid, setValidationMessage]);
 
     return (
         <PopupWithForm title={'Новое место'} name={'add'} isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>

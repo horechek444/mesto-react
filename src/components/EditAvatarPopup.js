@@ -25,7 +25,7 @@ const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar, isLoading}) => {
         setInputValue(fieldsEnumeration(''));
         setIsValid(fieldsEnumeration(false));
         setValidationMessage(fieldsEnumeration(''));
-    }, [isOpen]);
+    }, [isOpen, setInputValue, setIsValid, setValidationMessage]);
 
     return (
         <PopupWithForm title={'Обновить аватар'} name={'avatar'} isOpen={isOpen} onClose={onClose}
