@@ -1,7 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
-import ValidationHook from "../hooks/validationHook";
+import useValidation from "../hooks/useValidation";
 
 const EditProfilePopup = ({isOpen, onClose, onUpdateUser, isLoading}) => {
     const fields = ['name', 'about'];
@@ -11,7 +11,7 @@ const EditProfilePopup = ({isOpen, onClose, onUpdateUser, isLoading}) => {
         inputValue, setInputValue,
         validationMessage, setValidationMessage,
         handleInputChange, fieldsEnumeration
-    } = ValidationHook(fields);
+    } = useValidation(fields);
 
     const currentUser = React.useContext(CurrentUserContext);
 
@@ -41,7 +41,7 @@ const EditProfilePopup = ({isOpen, onClose, onUpdateUser, isLoading}) => {
                         className={`${validationMessage.name ? `popup__input popup__input_type_name popup__input_type_error` : `popup__input popup__input_type_name`}`}
                         type="text" name="name" value={inputValue.name}
                         onChange={handleInputChange} placeholder="Имя" minLength="2" maxLength="20"
-                        pattern="^[A-Za-zА-Яа-яЁё\s\D]+$" required/>
+                        pattern="^[A-Za-zА-Яа-яЁё\D][A-Za-zА-Яа-яЁё\s\D]*[A-Za-zА-Яа-яЁё\D]$" required/>
                     <span
                         className={`${isValid.name ? `popup__error` : `popup__error popup__error_type_active`}`}>{validationMessage.name}</span>
                 </label>
@@ -50,7 +50,7 @@ const EditProfilePopup = ({isOpen, onClose, onUpdateUser, isLoading}) => {
                         className={`${validationMessage.about ? `popup__input popup__input_type_about popup__input_type_error` : `popup__input popup__input_type_about`}`}
                         type="text" name="about" value={inputValue.about}
                         onChange={handleInputChange} placeholder="Занятие" minLength="2" maxLength="200"
-                        pattern="^[A-Za-zА-Яа-яЁё\s\D]+$" required/>
+                        pattern="^[A-Za-zА-Яа-яЁё\D][A-Za-zА-Яа-яЁё\s\D]*[A-Za-zА-Яа-яЁё\D]$" required/>
                     <span
                         className={`${isValid.about ? `popup__error` : `popup__error popup__error_type_active`}`}>{validationMessage.about}</span>
                 </label>

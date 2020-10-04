@@ -1,6 +1,6 @@
 import React from "react";
 
-const ValidationHook = (fields) => {
+const useValidation = (fields) => {
     const fieldsEnumeration = (value) => {
         return (
             fields.reduce((acc, field) => {
@@ -40,4 +40,4 @@ const ValidationHook = (fields) => {
     }
 }
 
-export default ValidationHook;
+export default useValidation;
