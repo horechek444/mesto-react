@@ -30,7 +30,7 @@ const EditProfilePopup = ({isOpen, onClose, onUpdateUser, isLoading}) => {
         });
         setIsValid(fieldsEnumeration(true));
         setValidationMessage(fieldsEnumeration(''));
-    }, [currentUser, isOpen]);
+    }, [currentUser, isOpen, setInputValue, setIsValid, setValidationMessage]);
 
     return (
         <PopupWithForm title={'Редактировать профиль'} name={'edit'} isOpen={isOpen} onClose={onClose}
