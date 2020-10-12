@@ -126,20 +126,6 @@ const App = () => {
             })
     };
 
-    const handleEscapeClose = (event) => {
-        if (event.key === 'Escape') {
-            closeAllPopups()
-        }
-    };
-
-    React.useEffect(() => {
-        document.addEventListener("keydown", handleEscapeClose, false);
-
-        return () => {
-            document.removeEventListener("keydown", handleEscapeClose, false);
-        };
-    });
-
     const handleAddPlaceSubmit = (inputValue) => {
         setIsLoading(true)
         api.createCard(inputValue)
